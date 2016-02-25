@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Implementation-Title: CRMS
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: JEE4
+Implementation-Vendor-Id: com.crms
+Build-Jdk: 1.8.0_60
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
