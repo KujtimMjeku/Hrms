@@ -15,4 +15,10 @@ public class CarController {
 	public String goHome() {		
 		return "pages/car";
 	}
+	
+	@RequestMapping(value="/go", method = RequestMethod.GET) 
+	public String goHom1e() {		
+		return "pages/car";
+	}
+	
 }
