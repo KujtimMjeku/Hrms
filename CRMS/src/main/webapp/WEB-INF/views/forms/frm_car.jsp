@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <c:if test="${saveUrl eq 'add'}">
 	<spring:url value="/car/add" var="submitUrl" />
@@ -10,7 +11,7 @@
 <c:if test="${saveUrl eq 'update'}">
 	<spring:url value="/car/update/${car.id}" var="submitUrl" />
 </c:if>
-<form:form modelAttribute="car" id="car_frm" action="${submitUrl}"
+<form:form modelAttribute="car" id="car_frm" action="${submitUrl}?${_csrf.parameterName}=${_csrf.token}"
 	method="post" cssClass="form-horizontal" enctype="multipart/form-data">
 	<div class="form-group">
 		<label for="cartype-name" class="control-label col-sm-2">Name</label>
@@ -97,10 +98,10 @@
 		<label for="car-image" class="control-label col-sm-2">Cmimi
 			ditor</label>
 		<div class="col-sm-10">
-			<input id="car-image" type="file" ></input>
-			<form:input id="car-image" cssClass="form-control"
+			<input id="car-image" name="file" type="file"></input>
+			<%-- <form:input id="car-image" cssClass="form-control"
 				path="base_Price_Per_Day" />
-			<span id="type-error" class="help-block with-errors"></span>
+			<span id="type-error" class="help-block with-errors"></span> --%>
 		</div>
 	</div>
 	<input type="submit" id="cartype-update-btn" class="btn btn-default"

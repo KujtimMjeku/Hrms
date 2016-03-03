@@ -70,13 +70,17 @@
 										${car.id}
 									</c:forEach></td>
 									<td>
+									<spring:url value="/cartype/edit/${cartype.id}" var="editUrl"></spring:url>
+									<spring:url value="/cartype/update/${cartype.id}" var="updatetUrl"></spring:url>
+									<spring:url value="/cartype/delete/${cartype.id}" var="deleteUrl"></spring:url>
+									<spring:url value="/cartype/" var="reloadtUrl"></spring:url>
 										<button type="button"
-											onclick="edit_modal('cartype/edit/${cartype.id}','cartype/update/${cartype.id}','cartype')"
+											onclick="edit_modal('${editUrl}','${updatetUrl}','${reloadtUrl}')"
 											class="btn btn-default edit_record">
 											<i class="fa fa-pencil"></i>
 										</button>
 										<button type="button"
-											onclick="confirm_modal('cartype/delete/${cartype.id}','cartype')"
+											onclick="confirm_modal('${deleteUrl}','cartype')"
 											class="btn btn-default delete_record">
 											<i class="fa fa-trash-o"></i>
 										</button>

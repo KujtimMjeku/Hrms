@@ -36,7 +36,7 @@ public class CarTypeDAOImp implements CarTypeDAO {
 	@Transactional
 	public void insert(CarType carType) {
 		// sessionFactory.getCurrentSession().saveOrUpdate(carType);
-		em.persist(carType);
+		em.merge(carType);
 
 	}
 

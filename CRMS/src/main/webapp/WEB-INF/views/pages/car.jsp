@@ -10,8 +10,6 @@
 <c:url value="/resources/js/jquery-1.12.0.min.js" var="jqueryJs" />
 <spring:url value="/resources/js/bootstrap.min.js" var="bootstrapJs" />
 <spring:url value="/resources/js/modal.js" var="modalJs" />
-
-
 <script type="text/javascript" src="${jqueryJs}"></script>
 <script type="text/javascript" src="${bootstrapJs}"></script>
 <script type="text/javascript" src="${modalJs}"></script>
@@ -26,6 +24,20 @@
 
 
 <title>Insert title here</title>
+<script type="text/javascript">
+
+/* 
+$(document).ready(function() {
+	$(".c-image").mouseover(function(){
+		$(".c-image").popover(); 
+		$("[data-toggle=popover]").popover()
+		//$(this).attr('width','100px').attr('height','100px');
+	})
+	$(".c-image").mouseleave(function(){
+		$(this).attr('width','30px').attr('height','30px');
+	})
+}); */
+</script>
 </head>
 <body>
 	<div class="container-fluid">

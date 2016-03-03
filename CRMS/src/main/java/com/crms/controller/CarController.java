@@ -1,8 +1,12 @@
 package com.crms.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.websocket.server.PathParam;
 
@@ -14,7 +18,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.crms.dao.CarDAO;
 import com.crms.dao.CarTypeDAO;
@@ -33,9 +39,27 @@ public class CarController {
 
 	@RequestMapping(value="/", method = RequestMethod.GET) 
 	public String goHome(Model model) {
-		model.addAttribute("cars", carDao.findAll());
+		
+		List<Car> cars=(List<Car>) carDao.findAll();
+		Map<Integer,String> fotot=new HashMap<>();
+		
+		for (Car c:cars) {
+			if(!(c.getImage() == null))
+			{
+				fotot.put(c.getId(), Base64.getEncoder().encodeToString(c.getImage()));
+			}
+			else
+			{
+				fotot.put(c.getId(),"33");
+			}
+		}
+		
+		model.addAttribute("cars", cars);
+		model.addAttribute("foto", fotot);
 		model.addAttribute("records_count", carDao.count());
 		List<Integer> p=new ArrayList<>();
+		
+	
 		p.add(1);
 		p.add(2);
 		p.add(3);
@@ -88,23 +112,28 @@ public class CarController {
 	}
 	
 	@RequestMapping(value="/add", method = RequestMethod.POST) 
-	public String goSave(Model model,@ModelAttribute Car car) {	
+	public String goSave(Model model,@ModelAttribute Car car,@RequestParam(name="file") MultipartFile[] files) {	
 		
 		System.out.println(car);
-		System.out.println(car.getTblcarType());
-		System.out.println(car.getTblcarType().getAutomatic());
 		CarType ct=cartypeDao.getCarTypeByNameAndTypeAndAutomatic(
 				car.getTblcarType().getName(),
 				car.getTblcarType().getType(), 
 				car.getTblcarType().getAutomatic());
 		car.setTblcarType(ct);
+		car.setImage_name(files[0].getOriginalFilename());
+		try {
+			car.setImage(files[0].getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Car c=carDao.save(car);
 		System.out.println(c);
 		return "redirect:/car/";
 	}
 	
 	@RequestMapping(value="/update/{id}", method = RequestMethod.POST) 
-	public String goUpdate(Model model,@ModelAttribute Car car,@PathVariable("id") int id) {	
+	public String goUpdate(Model model,@ModelAttribute Car car,@RequestParam(name="file") MultipartFile[] files,@PathVariable("id") int id) {	
 		
 		System.out.println(car);
 		System.out.println(car.getTblcarType());
@@ -113,6 +142,13 @@ public class CarController {
 				car.getTblcarType().getName(),
 				car.getTblcarType().getType(), 
 				car.getTblcarType().getAutomatic());
+		car.setImage_name(files[0].getOriginalFilename());
+		try {
+			car.setImage(files[0].getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		car.setTblcarType(ct);
 		Car c=carDao.save(car);
 		System.out.println("test"+c);

@@ -52,6 +52,7 @@
 									<th>Color</th>
 									<th>Date manufacturing</th>
 									<th>Base price per day</th>
+									<th>image</th>
 									<th></th>
 								</tr>
 							</thead>
@@ -64,6 +65,7 @@
 									<td>${car.color}</td>
 									<td>${car.date_of_Manufacturing}</td>
 									<td>${car.base_Price_Per_Day}</td>
+									<td><img src="data:image/jpeg;base64,${foto[car.id]}"  width="30" height="30"></td>
 									<td>
 									<spring:url value="/car/edit/${car.id}" var="editUrl" />
 										<a type="button"

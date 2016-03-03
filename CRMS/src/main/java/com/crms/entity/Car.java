@@ -3,6 +3,7 @@ package com.crms.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
