@@ -8,7 +8,7 @@
 	<div
 		style="width: 100%; border-bottom: 1px solid #aaaaac; text-align: left; padding: 30px; background-color: #293741; color: #eeeeee; text-aligne: left; display: inline-block;">
 		<div style="display: inline-block;">
-			<img style="float: left; margin-top: 6px" src="img/test.jpg"
+			<img style="float: left; margin-top: 6px" src="<spring:url value="/resources/img/test.jpg"/>"
 				class="img-circle" alt="Cinque Terre" width="50" height="50">
 			<span style="padding-left: 10px; display: inline-block;">
 				Welcome...<br /> Kujtim Mjeku<br />Status: <span
@@ -16,15 +16,16 @@
 			</span>
 		</div>
 	</div>
+	
 	<ul style="background-color: #293741;" class="nav nav-default">
-		<li><a href="#" class="nav-elementt"> <span
+		<li><a href="<spring:url value="/"/>" class="nav-elementt"> <span
 				class="glyphicon glyphicon-dashboard" aria-hidden="true"> </span> <span
 				id="nav-ele-text">Dashboard</span>
 		</a></li>
-		<li><a href="car" class="nav-elementt"><i
+		<li><a href="<spring:url value="/car/"/>" class="nav-elementt"><i
 				class="fa fa-automobile"></i> Cars </a></li>
 				
-		<li><a href="cartype" class="nav-elementt"><i
+		<li><a href="<spring:url value="/cartype/"/>" class="nav-elementt"><i
 				class="fa fa-automobile"></i> Cars type </a></li>
 				
 		<li><a href="#" class="nav-elementt"> <span

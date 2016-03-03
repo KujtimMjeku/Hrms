@@ -7,9 +7,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<spring:url value="css/bootstrap.min.css" var="bootstrapMinCss" />
+<spring:url value="/resources/css/bootstrap.min.css" var="bootstrapMinCss" />
+<spring:url value="/resources/css/loginStyle.css" var="loginStyleCss" />
 <link rel="stylesheet" type="text/css" href="${bootstrapMinCss}">
-<link rel="stylesheet" href="css/loginStyle.css">
+<link rel="stylesheet" href="${loginStyleCss}">
 <title>Insert title here</title>
 </head>
 <body>

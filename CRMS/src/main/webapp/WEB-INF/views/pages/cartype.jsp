@@ -7,18 +7,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<spring:url value="js/jquery-1.12.0.min.js" var="jqueryJs" />
-<spring:url value="js/bootstrap.min.js" var="bootstrapJs" />
-<spring:url value="js/modal.js" var="modalJs" />
+<spring:url value="/resources/js/jquery-1.12.0.min.js" var="jqueryJs" />
+<spring:url value="/resources/js/bootstrap.min.js" var="bootstrapJs" />
+<spring:url value="/resources/js/modal.js" var="modalJs" />
 
 
 <script type="text/javascript" src="${jqueryJs}"></script>
 <script type="text/javascript" src="${bootstrapJs}"></script>
 <script type="text/javascript" src="${modalJs}"></script>
-<spring:url value="css/bootstrap.min.css" var="bootstrapMinCss" />
-<spring:url value="css/font-awesome.css" var="fontAwsomeCss" />
-<spring:url value="css/style.css" var="styleCss" />
-<spring:url value="css/style2.css" var="style2Css" />
+<spring:url value="/resources/css/bootstrap.min.css" var="bootstrapMinCss" />
+<spring:url value="/resources/css/font-awesome.css" var="fontAwsomeCss" />
+<spring:url value="/resources/css/style.css" var="styleCss" />
+<spring:url value="/resources/css/style2.css" var="style2Css" />
 <link rel="stylesheet" type="text/css" href="${bootstrapMinCss}">
 <link rel="stylesheet" type="text/css" href="${fontAwsomeCss}">
 <link rel="stylesheet" type="text/css" href="${styleCss}">

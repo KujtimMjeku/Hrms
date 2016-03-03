@@ -3,6 +3,7 @@ package com.crms.config;
 import java.util.Properties;
 
 import javax.sql.DataSource;
+import javax.transaction.TransactionManager;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.hibernate.SessionFactory;
@@ -12,10 +13,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -58,12 +61,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	}
 
 	@Autowired
-	@Bean(name = "transactionManager")
-	public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
-		HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);
+	@Bean
+    public PlatformTransactionManager transactionManager(LocalContainerEntityManagerFactoryBean entityManagerFactory) {
+        final JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactory.getObject());
+        return transactionManager;
+    }
+	
 
-		return transactionManager;
-	}
 
 	@Autowired
 	@Bean
@@ -75,24 +80,24 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		adapter.setDatabasePlatform("org.hibernate.dialect.MySQLDialect");
 		return adapter;
 	}
-	
+
 	@Autowired
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
 			JpaVendorAdapter jpaVendorAdapter) {
 		LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
 		emfb.setDataSource(dataSource);
-		emfb.setJpaVendorAdapter(jpaVendorAdapter);
-		emfb.setPackagesToScan("com.crms.entity");
+		emfb.setPackagesToScan("com.crms");
+		emfb.setJpaVendorAdapter(jpaVendorAdapter);		
 		return emfb;
 	}
 
-	// @Autowired
-	// @Bean(name = "carTypeDao")
-	// public CarTypeDAO getUserDao(SessionFactory sessionFactory) {
-	// return new CarTypeDAOImp(sessionFactory);
-	// }
-	//
+/*	@Autowired
+	@Bean(name = "carDao")
+	public CarDAO getCarDao() {
+		return new CarDAOImp();
+	}*/
+
 	@Bean
 	public InternalResourceViewResolver getInternalResourceViewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -104,10 +109,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/resources/css/");
-		registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/resources/js/");
+		registry.addResourceHandler("/resources/**").addResourceLocations("/WEB-INF/resources/");
+/*		registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/resources/js/");
 		registry.addResourceHandler("/img/**").addResourceLocations("/WEB-INF/resources/img/");
-		registry.addResourceHandler("/fonts/**").addResourceLocations("/WEB-INF/resources/fonts/");
+		registry.addResourceHandler("/fonts/**").addResourceLocations("/WEB-INF/resources/fonts/");*/
 	}
 
 }

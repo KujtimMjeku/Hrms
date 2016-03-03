@@ -12,5 +12,9 @@ public interface CarTypeDAO
 	public void delete(int id);
 	public Long numberOfRows();
 	public List<Integer> pagesList(int perPage);
+	public List<String> getCarNames();
+	public List<String> getCarTypesByName(String name);
+	public List<Boolean> getCarAutomaticByNameAndType(String name,String type);
+	public CarType getCarTypeByNameAndTypeAndAutomatic(String name,String type,Boolean automatic);
 
 }

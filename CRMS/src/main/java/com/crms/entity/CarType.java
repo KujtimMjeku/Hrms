@@ -57,7 +57,7 @@ public class CarType {
 
 	@Column(name = "PRODUCER", updatable = true, nullable = false)
 	@NotNull
-	@Size(min=3, max=30,message="* Field size most be beteween 3 and 30")
+	//@Size(min=3, max=30,message="* Field size most be beteween 3 and 30")
 	public String getProducer() {
 		return this.producer;
 	}

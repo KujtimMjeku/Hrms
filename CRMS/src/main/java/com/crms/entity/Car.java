@@ -27,16 +27,17 @@ public class Car{
 	private Date date_of_Manufacturing;
 
 	private String regjistration_Number;
-
+	private String image_name;
+	private byte[] image;
 	//bi-directional many-to-one association to Booking
 	/*@OneToMany(mappedBy="tblcar")
 	private List<Booking> tblbookings;*/
 
 	//bi-directional many-to-one association to Branch
-/*	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name="Branch_ID")
-	private Branch tblbranch;
-*/
+	private Branch tblbranch;*/
+
 	//bi-directional many-to-one association to CarType
 	@ManyToOne
 	@JoinColumn(name="Car_type_ID")
@@ -84,6 +85,7 @@ public class Car{
 	public void setRegjistration_Number(String regjistration_Number) {
 		this.regjistration_Number = regjistration_Number;
 	}
+	
 /*
 	public List<Booking> getTblbookings() {
 		return this.tblbookings;
@@ -106,14 +108,30 @@ public class Car{
 
 		return tblbooking;
 	}*/
-/*
-	public Branch getTblbranch() {
+
+	/*public Branch getTblbranch() {
 		return this.tblbranch;
 	}
 
 	public void setTblbranch(Branch tblbranch) {
 		this.tblbranch = tblbranch;
 	}*/
+
+	public String getImage_name() {
+		return image_name;
+	}
+
+	public void setImage_name(String image_name) {
+		this.image_name = image_name;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
 
 	public CarType getTblcarType() {
 		return this.tblcarType;
@@ -122,5 +140,13 @@ public class Car{
 	public void setTblcarType(CarType tblcarType) {
 		this.tblcarType = tblcarType;
 	}
+
+	@Override
+	public String toString() {
+		return "Car [id=" + id + ", base_Price_Per_Day=" + base_Price_Per_Day + ", color=" + color
+				+ ", date_of_Manufacturing=" + date_of_Manufacturing + ", regjistration_Number=" + regjistration_Number
+				+ ", tblcarType="  + "]";
+	}
+	
 
 }
