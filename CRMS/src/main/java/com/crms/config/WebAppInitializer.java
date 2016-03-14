@@ -21,9 +21,11 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
 	    // Link Application Context to Serlvet Context
 	    servletContext.addListener(new ContextLoaderListener(mvcContext));
-
+	    DispatcherServlet dispatch=new DispatcherServlet(mvcContext);
+	    dispatch.setThrowExceptionIfNoHandlerFound(true);
+	    
 	    // Register and map the dispatcher servlet
-	    ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(mvcContext));
+	    ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", dispatch);
 	    dispatcher.setLoadOnStartup(1);
 	    dispatcher.addMapping("/");
 	}
@@ -33,5 +35,6 @@ public class WebAppInitializer implements WebApplicationInitializer {
 		context.setConfigLocation("com.crms.config.WebConfig");
 		return context;
 	}
+
 
 }

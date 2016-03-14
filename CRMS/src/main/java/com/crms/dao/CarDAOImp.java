@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
@@ -129,6 +130,15 @@ public class CarDAOImp implements CarDAO {
 		}
 
 		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Car> fetchFromTo(int start, int count) {
+		Query query= em.createQuery("SELECT t FROM Car t");
+		query.setFirstResult(start);
+		query.setMaxResults(count);
+		return query.getResultList();
 	}
 
 }

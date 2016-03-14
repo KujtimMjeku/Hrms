@@ -1,4 +1,4 @@
-package com.crms.entity;
+	package com.crms.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;

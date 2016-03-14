@@ -12,7 +12,7 @@
 						<span>
 							<h3>Menage Car Types</h3>
 						</span>
-						<spring:url value="cartype/add" var="addUrl" />
+						<spring:url value="/cartype/add" var="addUrl" />
 						<button onclick="add_modal('${addUrl}')" class="btn btn-primary">Add
 							new</button>
 					</div>

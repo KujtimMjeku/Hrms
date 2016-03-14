@@ -80,7 +80,7 @@
 		<label for="car-date_of_Manufacturing" class="control-label col-sm-2">Regjistration
 			Date</label>
 		<div class="col-sm-10">
-			<form:input id="car-date_of_Manufacturing" cssClass="form-control"
+			<form:input id="car-date_of_Manufacturing" placeholder="YYYY/MM/DD" cssClass="form-control"
 				path="date_of_Manufacturing" />
 			<span id="type-error" class="help-block with-errors"></span>
 		</div>
@@ -95,9 +95,14 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="car-image" class="control-label col-sm-2">Cmimi
-			ditor</label>
+		<label for="car-image" class="control-label col-sm-2">Foto</label>
 		<div class="col-sm-10">
+		 <c:if test="${not empty image}">
+		 <img id="car-image-orig" style="opacity:0.8; border:1px solid #a6a6a6; margin-bottom:5px" alt="test" class="img-thumbnail"  src="data:image/jpeg;base64,${image}" width="150" height="150">
+		 </c:if>
+		 <c:if test="${empty image}">
+			<img id="car-image-orig" style="opacity:0.4; border:1px solid #a6a6a6; margin-bottom:5px" alt="test" class="img-thumbnail"  src="<spring:url value="/resources/img/basic.png" />" width="150" height="150">
+		 </c:if>	
 			<input id="car-image" name="file" type="file"></input>
 			<%-- <form:input id="car-image" cssClass="form-control"
 				path="base_Price_Per_Day" />
@@ -110,3 +115,4 @@
 		value="Cancle">
 	<!--  -->
 </form:form>
+

@@ -82,7 +82,7 @@ function add_modal(add_url) {
 				backdrop : 'static'
 			});
 			document.getElementById('cartype_frm').setAttribute("action",
-					"cartype/save");
+					"/CRMS/cartype/save");
 			jQuery('#cartypefrm').find("#cartype-update-btn").attr('value',
 					'Save');
 			
@@ -90,7 +90,7 @@ function add_modal(add_url) {
 				var cartype_frm=$(this);
 				e.preventDefault();
 				$.ajax({
-					url : "cartype/save",
+					url : "/CRMS/cartype/save",
 					method: "POST",
 					data: $('#cartype_frm').serialize(),
 					success : function(result) {

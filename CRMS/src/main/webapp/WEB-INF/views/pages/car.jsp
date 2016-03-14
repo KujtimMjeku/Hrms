@@ -24,20 +24,7 @@
 
 
 <title>Insert title here</title>
-<script type="text/javascript">
 
-/* 
-$(document).ready(function() {
-	$(".c-image").mouseover(function(){
-		$(".c-image").popover(); 
-		$("[data-toggle=popover]").popover()
-		//$(this).attr('width','100px').attr('height','100px');
-	})
-	$(".c-image").mouseleave(function(){
-		$(this).attr('width','30px').attr('height','30px');
-	})
-}); */
-</script>
 </head>
 <body>
 	<div class="container-fluid">
