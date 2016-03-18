@@ -35,19 +35,9 @@ public class UsersRepositoryImp implements UsersRepository {
 	private JdbcUserDetailsManager jdbcManager;
 
 	@Override
+	@Transactional
 	public User findUserNyUsername(String username) {
 		User user= em.find(User.class, username);
-		@SuppressWarnings("unchecked")
-		List<String> authorities = em.createNativeQuery("select ga.authority "
-				+ "from groups g, group_members gm, group_authorities ga "
-				+ "where gm.username = :username "
-				+ "and g.id = ga.group_id "
-				+ "and g.id = gm.group_id").setParameter("username", username).getResultList();
-		System.out.println(authorities);
-		Set<GrantedAuthority> authList=new HashSet<GrantedAuthority>(AuthorityUtils.createAuthorityList(authorities.toArray(new String[authorities.size()])));
-		user.setAuthorities(authList);
-		UserGroup ug= em.find(UserGroup.class, 1);
-		System.out.println(ug.getMembers());
 		return user;
 	}
 

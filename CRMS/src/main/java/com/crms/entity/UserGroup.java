@@ -12,6 +12,7 @@ import javax.persistence.ColumnResult;
 import javax.persistence.ConstraintMode;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -43,7 +44,7 @@ public class UserGroup {
 	@Column(name="group_name")
 	private String name;
 	
-	@ElementCollection
+	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name="group_authorities", joinColumns=@JoinColumn(name="group_id"))
 	@Column(name="authority")
 	private List<String> authorities; 

@@ -1,10 +1,12 @@
 package com.crms.entity;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -13,6 +15,7 @@ import javax.persistence.Transient;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
@@ -30,9 +33,18 @@ public class User implements  UserDetails, CredentialsContainer {
 	private Set<GrantedAuthority> authorities;
 	private boolean enabled;
 	
-	@ManyToMany(mappedBy="members",cascade=CascadeType.PERSIST)
+	@ManyToMany(mappedBy="members",cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
+	private Set<UserGroup> groups;
 	
 	
+
+	public Set<UserGroup> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(Set<UserGroup> groups) {
+		this.groups = groups;
+	}
 
 	public void setUsername(String username) {
 		this.username = username;
@@ -66,7 +78,12 @@ public class User implements  UserDetails, CredentialsContainer {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
+		Set<String> authority=new HashSet<>();
+		for (UserGroup group : groups) {
+			authority.addAll(group.getAuthorities());
+		}
+		Set<GrantedAuthority> authList=new HashSet<GrantedAuthority>(AuthorityUtils.createAuthorityList(authority.toArray(new String[authority.size()])));
+		this.setAuthorities(authList);
 		return this.authorities;
 	}
 
