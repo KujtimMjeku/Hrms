@@ -1,4 +1,4 @@
-package com.crms.controller;
+	package com.crms.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,6 +12,7 @@ public class HomeController {
 	@RequestMapping(value="/")
 	public String goHome(){
 		return "home";
+		
 	}
 	
 	/*@ExceptionHandler(ResourceNotFoundException.class)

@@ -3,12 +3,17 @@ package com.crms.config;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.crms.services.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
@@ -16,19 +21,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private DataSource dataSource;
+	
+	@Autowired
+	private CustomAuthenticationProvider customAuthenticationProvider;
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
-		auth.jdbcAuthentication().dataSource(dataSource)
-				.usersByUsernameQuery("select username,password, enabled from users where username=?")
-				.groupAuthoritiesByUsername("select g.id, g.group_name, ga.authority "
-						+ "from groups g, group_members gm, group_authorities ga "
-						+ "where gm.username = ? "
-						+ "and g.id = ga.group_id "
-						+ "and g.id = gm.group_id")
-				.authoritiesByUsernameQuery("select username, role from user_roles where username=?")
-				.passwordEncoder(new BCryptPasswordEncoder()).and();
+		auth.authenticationProvider(customAuthenticationProvider);
 	}
 
 	@Override
@@ -50,4 +50,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    .csrf();
 		
 	}
+
 }

@@ -15,6 +15,7 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -30,7 +31,8 @@ import org.springframework.web.servlet.view.ResourceBundleViewResolver;
 								"com.crms.controller", 
 								"com.crms.dao",
 								"com.crms.services",
-								"com.crms.views" })
+								"com.crms.views",
+								"com.crms.repository"})
 @EnableTransactionManagement
 public class WebConfig extends WebMvcConfigurerAdapter {
 
@@ -42,6 +44,15 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		dataSource.setUsername("root");
 		dataSource.setPassword("root");
 		return (DataSource) dataSource;
+	}
+	
+	@Bean
+	@Autowired
+	public JdbcUserDetailsManager getJdbcUserDetailsManager(DataSource dataSource)
+	{
+		JdbcUserDetailsManager jdbcManager=new JdbcUserDetailsManager();
+		jdbcManager.setDataSource(dataSource);
+		return jdbcManager;
 	}
 
 	private Properties getHibernateProperties() {

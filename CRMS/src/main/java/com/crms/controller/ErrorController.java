@@ -24,7 +24,6 @@ public class ErrorController {
 	
 	
 	@ExceptionHandler(AccessDeniedException.class)
-	@PreAuthorize("isAuthenticated()")
     public String handleResource() {
 		System.out.println("test");
         return "errors/403";

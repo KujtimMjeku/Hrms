@@ -4,7 +4,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.crms.entity.User;
 
-public interface UsersRepository extends CrudRepository<User, Integer>
+public interface UsersRepository
 {
-
+	User findUserNyUsername(String username);
+	void saveUser(User user);
 }

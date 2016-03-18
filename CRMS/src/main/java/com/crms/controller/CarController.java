@@ -31,7 +31,10 @@ import com.crms.dao.CarDAO;
 import com.crms.dao.CarTypeDAO;
 import com.crms.entity.Car;
 import com.crms.entity.CarType;
+import com.crms.entity.User;
+import com.crms.repository.UsersRepository;
 import com.crms.services.CarService;
+import com.crms.services.UserGrupService;
 
 @Controller
 @RequestMapping(value="car") 
@@ -44,7 +47,13 @@ public class CarController {
 	private CarTypeDAO cartypeDao;
 	
 	@Autowired
+	private UserGrupService usr;
+	
+	@Autowired
 	private CarService carService;
+
+	@Autowired
+	private UsersRepository uRep;
 	
 	  @ModelAttribute("page")
 	    public Integer createPge() {
@@ -60,8 +69,15 @@ public class CarController {
 
 	public String goHome(Model model,@ModelAttribute("page") int page
 			,@ModelAttribute("perPage") int perPage) {
-		
-		System.out.println("page: "+page+" perPage: "+perPage);
+
+		//User user=(User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User u=new User();
+		u.setUsername("TeT");
+		u.setPassword("123");
+		u.setEmail("kuj1ta@gmail.com");
+		u.setEnabled(true);
+		uRep.saveUser(u);
+	//	System.out.println("Email : " +user.getEmail());
 		int rows=Math.toIntExact(carService.getRecordNumber());	
 		List<Car> cars=(List<Car>) carService.getPage(page, perPage);		
 		Map<Integer,String> fotot=new HashMap<>();	
@@ -89,7 +105,12 @@ public class CarController {
 		model.addAttribute("morePage", morePage);
 		model.addAttribute("pList", p);
 		model.addAttribute("cartypee", new Car());
-		System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+		/*UserDetails userDetails =
+				 (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+*/
+	//	System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+	//	User user= (User) SecurityContextHolder.getContext().getAuthentication();
+		//System.out.println(user.getPassword());
 		model.addAttribute("username", SecurityContextHolder.getContext().getAuthentication().getName());
 		return "pages/car";
 	}

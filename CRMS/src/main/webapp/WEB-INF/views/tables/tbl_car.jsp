@@ -38,7 +38,7 @@
 							aria-label="Default button group">
 							<button type="button" class="btn btn-default">Excel</button>
 							<a href='<spring:url value="/car/pdf/" />' class="btn btn-default">PDF</a>
-							<button type="button" class="btn btn-default">Print</button>
+							<button id="print-btn" type="button" class="btn btn-default">Print</button>
 						</div>
 						<span>Search: </span> <input class="form-control search-imput"
 							type="text">
@@ -48,7 +48,7 @@
 			<div class="table-body">
 				<div class="row">
 					<div class="col-sm-12">
-						<table class="table" tyle="color:black">
+						<table id="car-table" class="table" tyle="color:black">
 							<thead>
 								<tr>
 									<th></th>
@@ -153,8 +153,20 @@
 <spring:url value="/car/perpage/" var="ppchangeurl"></spring:url>
 <spring:url value="/car/" var="reload"></spring:url>
 <script type="text/javascript">
- 
+function printData()
+{
+   var divToPrint=document.getElementById("car-table");
+   newWin= window.open("");
+   newWin.document.write(divToPrint.outerHTML);
+   newWin.print();
+   newWin.close();
+}
+
+
 $(document).ready(function() {
+	$('#print-btn').on('click',function(){
+		printData();
+		})
 	$("#perPage").change(function(){
 		
 		 var chVal=$(this).val();

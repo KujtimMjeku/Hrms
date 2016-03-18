@@ -68,7 +68,7 @@ public class WebSecurityACL extends GlobalMethodSecurityConfiguration {
 		return service;
 	}
 
-	@Bean
+	@Bean	
 	@Autowired
 	PermissionEvaluator permissionEvaluator(JdbcMutableAclService aclService) {
 		return new AclPermissionEvaluator(aclService);
