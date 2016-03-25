@@ -22,6 +22,8 @@
 				class="glyphicon glyphicon-dashboard" aria-hidden="true"> </span> <span
 				id="nav-ele-text">Dashboard</span>
 		</a></li>
+		<li><a href="<spring:url value="/accounts/"/>" class="nav-elementt"><i
+				class="fa fa-users"></i> Accounts </a></li>
 		<li><a href="<spring:url value="/car/"/>" class="nav-elementt"><i
 				class="fa fa-automobile"></i> Cars </a></li>
 				

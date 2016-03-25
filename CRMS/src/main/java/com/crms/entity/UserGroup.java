@@ -49,7 +49,7 @@ public class UserGroup {
 	@Column(name="authority")
 	private List<String> authorities; 
 	
-	  @ManyToMany(cascade=CascadeType.PERSIST)
+	  @ManyToMany(cascade=CascadeType.ALL)
 	  @JoinTable(
 	      name="group_members",
 	      joinColumns=@JoinColumn(name="group_id", referencedColumnName="id"),

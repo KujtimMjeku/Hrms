@@ -1,15 +1,19 @@
 package com.crms.entity;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.springframework.security.core.CredentialsContainer;
@@ -24,6 +28,22 @@ public class User implements  UserDetails, CredentialsContainer {
 
 	private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
+	@Column(name="fname")
+	private String name;
+	
+	@Column(name="lname")
+	private String surename;
+	
+	@Column(name="bday")
+	@Temporal(TemporalType.DATE)
+	private Date birthDay;
+	
+	@Column(name="address")
+	private String address;
+	
+	@Column(name="telephone")
+	private String telephone;
+	
 	private String email;
 	private String password;
 	@Id
@@ -33,10 +53,50 @@ public class User implements  UserDetails, CredentialsContainer {
 	private Set<GrantedAuthority> authorities;
 	private boolean enabled;
 	
-	@ManyToMany(mappedBy="members",cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
+	@ManyToMany(mappedBy="members",cascade={CascadeType.ALL},fetch=FetchType.EAGER)
 	private Set<UserGroup> groups;
 	
 	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSurename() {
+		return surename;
+	}
+
+	public void setSurename(String surename) {
+		this.surename = surename;
+	}
+
+	public Date getBirthDay() {
+		return birthDay;
+	}
+
+	public void setBirthDay(Date birthDay) {
+		this.birthDay = birthDay;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
 
 	public Set<UserGroup> getGroups() {
 		return groups;

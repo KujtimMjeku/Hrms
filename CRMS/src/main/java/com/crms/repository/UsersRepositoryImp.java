@@ -17,6 +17,7 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.crms.dto.UserDto;
 import com.crms.entity.User;
 import com.crms.entity.UserGroup;
 
@@ -53,6 +54,48 @@ public class UsersRepositoryImp implements UsersRepository {
 			
 		}
 		jdbcManager.addUserToGroup("kujta", "Employee");
+	}
+
+	@Override
+	@Transactional
+	public List<User> findAllUsers() {
+		return em.createQuery("Select t from User t").getResultList();
+	}
+
+	@Override
+	@Transactional
+	public Set<UserGroup> findAllGroups() {
+		return new HashSet<UserGroup>(em.createQuery("Select t from UserGroup t").getResultList());
+	}
+
+	@Override
+	@Transactional
+	public User updateUser(UserDto user) 
+	{
+		User usr =findUserNyUsername(user.getUsername());
+		usr.setName(user.getName());
+		usr.setSurename(user.getSurename());
+		usr.setAddress(user.getAddress());
+		usr.setEmail(user.getEmail());
+		usr.setTelephone(user.getTelephone());
+		usr.setBirthDay(user.getBirthDay());
+		Set<UserGroup> ug=new HashSet<>();
+		for (Integer groupId : user.getGroups()) {
+			ug.add(findUserGroupById(groupId));
+		}
+		usr.setGroups(ug);
+		
+		em.persist(usr);
+		for (UserGroup userGroup : usr.getGroups()) {
+			System.out.println(userGroup.getName());
+		}
+		
+		return usr;
+	}
+	@Override
+	@Transactional
+	public UserGroup findUserGroupById(Integer id) {
+		return em.find(UserGroup.class, id);
 	}
 	
 	
