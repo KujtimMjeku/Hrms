@@ -49,11 +49,7 @@ public class UserGroup {
 	@Column(name="authority")
 	private List<String> authorities; 
 	
-	  @ManyToMany(cascade=CascadeType.ALL)
-	  @JoinTable(
-	      name="group_members",
-	      joinColumns=@JoinColumn(name="group_id", referencedColumnName="id"),
-	      inverseJoinColumns=@JoinColumn(name="username", referencedColumnName="username"))
+	@ManyToMany(mappedBy="groups",fetch=FetchType.EAGER)
 	private List<User> members;
 	
 	public List<User> getMembers() {
@@ -80,9 +76,4 @@ public class UserGroup {
 	public void setAuthorities(List<String> authorities) {
 		this.authorities = authorities;
 	}
-	
-	
-	
-	
- 
 }

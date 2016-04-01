@@ -9,6 +9,9 @@
 <c:if test="${edit eq true }">
 	<spring:url value="/accounts/update/" var="updateUrl"/>
 </c:if>
+<c:if test="${edit eq false }">
+	<spring:url value="/accounts/create/" var="updateUrl"/>
+</c:if>
 <form:form modelAttribute="user" id="user_frm" action="${updateUrl}" method="post"
 	cssClass="form-horizontal">
 	<div class="form-group">

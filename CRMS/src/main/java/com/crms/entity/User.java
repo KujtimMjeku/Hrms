@@ -10,11 +10,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.Valid;
 
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
@@ -44,7 +47,9 @@ public class User implements  UserDetails, CredentialsContainer {
 	@Column(name="telephone")
 	private String telephone;
 	
+	@Column(unique=true)
 	private String email;
+	
 	private String password;
 	@Id
 	private String username;
@@ -53,7 +58,11 @@ public class User implements  UserDetails, CredentialsContainer {
 	private Set<GrantedAuthority> authorities;
 	private boolean enabled;
 	
-	@ManyToMany(mappedBy="members",cascade={CascadeType.ALL},fetch=FetchType.EAGER)
+	 @ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	 @JoinTable(
+	 name="group_members",
+	    		  joinColumns=@JoinColumn(name="username", referencedColumnName="username"),
+	    		  inverseJoinColumns=@JoinColumn(name="group_id", referencedColumnName="id"))
 	private Set<UserGroup> groups;
 	
 	

@@ -7,21 +7,40 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.crms.entity.UserGroup;
 
 public class UserDto {
 
+	@NotEmpty
 	private String name;
-	
+	@NotEmpty
 	private String surename;
 
 	@Temporal(TemporalType.DATE)
+	@NotNull(message="The birth day is required")
+	@Past(message="Date of birth most be the past")
 	private Date birthDay;	
+	@NotEmpty
 	private String address;	
+	@NotEmpty
+	@Pattern(regexp="^\\+(?:[0-9] ?){6,14}[0-9]$",message="write right format of phone number")
 	private String telephone;	
+	
+	@NotEmpty
+	@Email(message="please write email correct")
 	private String email;
-	private String password;
+	
+	@NotEmpty
 	private String username;
 	
 
@@ -63,12 +82,7 @@ public class UserDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
+
 	public String getUsername() {
 		return username;
 	}

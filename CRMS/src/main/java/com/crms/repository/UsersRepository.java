@@ -17,4 +17,5 @@ public interface UsersRepository
 	User updateUser(UserDto user);
 	Set<UserGroup> findAllGroups();
 	UserGroup findUserGroupById(Integer id);
+	String saveUser(UserDto user);
 }

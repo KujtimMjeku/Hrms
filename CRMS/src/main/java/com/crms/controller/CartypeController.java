@@ -57,7 +57,6 @@ public class CartypeController {
 		Map<String, Object> jsonResponse=new HashMap<String, Object>();
 		if (bindingResult.hasErrors()) 
 		{  
-			carType.setName("Hello");
 			jsonResponse.put("STATUS", "error");
 			jsonResponse.put("VALUE", getErrorLists(bindingResult));
 			System.out.println(bindingResult.getModel());			

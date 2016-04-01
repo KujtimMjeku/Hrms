@@ -10,8 +10,8 @@
 			<div class="table-header">
 				<div class="row">
 					<div class="col-sm-12">
-						<spring:url value="/car/add" var="addUrl" />
-						<a href="${addUrl}" class="btn btn-primary">Add new</a>
+						<spring:url value="/accounts/new/" var="addUrl" />
+						<a href="#" onclick="edituser('${addUrl}')" class="btn btn-primary">Add new</a>
 					</div>
 				</div>
 			</div>

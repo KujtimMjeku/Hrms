@@ -12,8 +12,15 @@
 <spring:url value="/resources/js/modal.js" var="modalJs" />
 <spring:url value="/resources/js/select2.js" var="select2Js" />
 
+<spring:url
+	value="/resources/js/jquery-ui-1.11.4.custom/jquery-ui.min.js"
+	var="jqueryUi" />
+<spring:url
+	value="/resources/js/jquery-ui-1.11.4.custom/jquery-ui.min.css"
+	var="jqueryUiCss" />
 
 <script type="text/javascript" src="${jqueryJs}"></script>
+<script type="text/javascript" src="${jqueryUi}"></script>
 <script type="text/javascript" src="${bootstrapJs}"></script>
 <script type="text/javascript" src="${modalJs}"></script>
 <script type="text/javascript" src="${select2Js}"></script>
@@ -28,6 +35,7 @@
 <link rel="stylesheet" type="text/css" href="${styleCss}">
 <link rel="stylesheet" type="text/css" href="${style2Css}">
 <link rel="stylesheet" type="text/css" href="${select2Css}">
+<link rel="stylesheet" type="text/css" href="${jqueryUiCss}">
 
 
 <title>Insert title here</title>
@@ -53,6 +61,16 @@
 
 				<div class="tab-content">
 					<div id="home" class="tab-pane fade in active">
+						<c:if test="${not empty password}">
+						<div style="margin: 10px 0px 0px 0px" class="alert alert-success alert-dismissible" role="alert">
+							<button type="button" class="close" data-dismiss="alert"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<strong>Account created!</strong> Your account is created
+							successfuly with password <strong id="pas-alert">${password}</strong>
+						</div>
+						</c:if>
 						<jsp:include page="../tables/tbl_users.jsp">
 							<jsp:param value="${users}" name="users" />
 							<jsp:param value="${records_count}" name="records_count" />
@@ -95,8 +113,7 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 style="color: gray;">View Profile</h4>
 				</div>
-				<div class="modal-body">
-				</div>
+				<div class="modal-body"></div>
 			</div>
 		</div>
 	</div>
@@ -111,26 +128,66 @@
 					backdrop : 'static'
 				});
 				jQuery('#view_user_modal').find(".modal-body").html(result);
-				$(".modal-close-btn").on('click',function(){
+				$(".modal-close-btn").on('click', function() {
 					$("#view_user_modal").modal('hide');
 				})
 
 			}
 		});
 	}
-	function edituser(username) {
+	function edituser(url) {
 		$.ajax({
-			url : username,
+			url : url,
 			method : "GET",
 			success : function(result) {
 				jQuery('#view_user_modal').modal('show', {
 					backdrop : 'static'
 				});
 				jQuery('#view_user_modal').find(".modal-body").html(result);
-				$(".modal-close-btn").on('click',function(){
+				$(".modal-close-btn").on('click', function() {
 					$("#view_user_modal").modal('hide');
 				})
-				$("#groups-name").select2({ maximumSelectionLength: 3,placeholder: "Select role" });
+				$("#groups-name").select2({
+					maximumSelectionLength : 3,
+					placeholder : "Select role"
+				});
+				$("#user-birthDay").datepicker({
+					changeMonth : true,
+					changeYear : true
+				});
+				if ($("#user-birthDay").val()) {
+					$("#user-birthDay").val(
+							$.datepicker.formatDate('dd/mm/yy', new Date($(
+									"#user-birthDay").val())));
+				}
+				;
+				$("#user_frm").submit(function(e){
+					var cartype_frm=$(this);
+					var postUrl=$(this).attr("action");
+					alert("test");
+					e.preventDefault();
+					$.ajax({
+						url : postUrl,
+						method: "POST",
+						data: $('#user_frm').serialize(),
+						success : function(result) {
+							if(result.STATUS ==="success")
+							{
+								location.reload();
+							}
+							else if(result.STATUS ==="error")
+							{
+								var errors=result.VALUE;
+								$(".with-errors").css("display","none");
+								 $.each(errors, function(key, value) {				 
+									 cartype_frm.find("#"+key+"-error").text(value).css("display","inline-block");
+									  //console.log(key+" "+value)
+								});
+							}
+							//jQuery('#edit_modal').find(".modal-body").html(result);
+						}
+					});
+				});
 
 			}
 		});
@@ -144,7 +201,7 @@
 					backdrop : 'static'
 				});
 				jQuery('#view_user_modal').find(".modal-body").html(result);
-				$(".modal-close-btn").on('click',function(){
+				$(".modal-close-btn").on('click', function() {
 					$("#view_user_modal").modal('hide');
 				})
 
@@ -152,14 +209,12 @@
 		});
 	}
 	$(document).ready(function() {
-		
-	
+
 		$(".nav-tabs li").on("click", function() {
 			$(".nav-tabs li").removeClass("active");
 			$(this).addClass("active");
 		})
 
 	})
-	
 </script>
 </html>
