@@ -29,7 +29,18 @@
               </div>
             </div>
             <div class="box-body">
-              Start creating your amazing application!
+              <a class="btn btn-app" style="text-align:left; width:100%;height: 46px; padding-top: 12px">
+                    <i class="fa fa-folder-open"><p class="text-muted" style="display: inline-block; padding-left: 15px">Home directory</p></i>
+              </a> 
+
+	<div class="form-group">
+		<label for="directoryName">Email address</label> 
+		<input
+			type="text" class="form-control" id="directoryName"
+			placeholder="Folder name">
+	</div>
+
+              
             </div><!-- /.box-body -->
             <div class="box-footer">
               Footer

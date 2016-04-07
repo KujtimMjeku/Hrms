@@ -18,7 +18,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @PropertySource(value={"classpath:application.properties"})
-@EnableJpaRepositories("com.dms.mvc.repositories")
+@EnableJpaRepositories("com.dms.mvc.data.repositories")
 @Configuration
 @EnableTransactionManagement
 public class DataBaseConfiguration {
@@ -57,4 +57,11 @@ public class DataBaseConfiguration {
 		emfb.setJpaVendorAdapter(jpaVendorAdapter);		
 		return emfb;
 	}
+	@Autowired
+	@Bean
+    public PlatformTransactionManager transactionManager(LocalContainerEntityManagerFactoryBean entityManagerFactory) {
+        final JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactory.getObject());
+        return transactionManager;
+    }
 }

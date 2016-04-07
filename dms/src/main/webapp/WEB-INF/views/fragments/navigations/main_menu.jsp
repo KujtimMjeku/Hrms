@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
  <!-- =============================================== -->
 
       <!-- Left side column. contains the sidebar -->
@@ -9,7 +10,8 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+            
+              <img src='<spring:url value="/resources/template/dist/img/user2-160x160.jpg" />' class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
               <p>Alexander Pierce</p>
@@ -28,6 +30,13 @@
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
+          <li class="header">Documents</li>
+          <li>
+              <a href='<spring:url value="/directory/?dir=1" />'>
+                <i class="fa fa-home"></i> <span>HOME</span>
+              </a>
+            </li>
+          
             <li class="header">MAIN NAVIGATION</li>
             <li class="treeview">
               <a href="#">
