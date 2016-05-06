@@ -6,7 +6,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>DMS</title>
+<title><spring:message code="app.title"/></title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -19,6 +19,11 @@
 <!-- Ionicons -->
 <link rel="stylesheet"
 	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	<link rel="stylesheet" href='<spring:url value="/resources/template/plugins/daterangepicker/daterangepicker-bs3.css"></spring:url>'> 
+	
+	<link rel="stylesheet" href='<spring:url value="/resources/template/plugins/select2/select2.min.css"></spring:url>'> 
+	
+	<link rel="stylesheet" href='<spring:url value="/resources/template/plugins/datepicker/datepicker3.css"></spring:url>'> 
 <!-- Theme style -->
 <link rel="stylesheet" href='<spring:url value="/resources/template/dist/css/AdminLTE.min.css"></spring:url>'>
 <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -31,7 +36,3 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-</head>
-<body class="hold-transition skin-blue sidebar-mini">
-	<!-- Site wrapper -->
-	<div class="wrapper">

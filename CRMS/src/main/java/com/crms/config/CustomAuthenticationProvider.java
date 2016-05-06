@@ -24,9 +24,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	@Autowired
 	CustomUserDetailsService userService;
-	
-	
-	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String name = authentication.getName();

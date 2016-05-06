@@ -28,10 +28,13 @@ public class Directory {
 	@JoinColumn(name="parent")
     private Directory parent;
 	
-	@OneToMany(targetEntity=Directory.class,mappedBy="parent",cascade={CascadeType.ALL},fetch=FetchType.EAGER)
+	@OneToMany(targetEntity=Directory.class,mappedBy="parent",cascade={CascadeType.REMOVE},fetch=FetchType.EAGER)
     private List<Directory> children;
     
     private String name;
+    
+    @OneToMany(mappedBy="directory")
+    private List<Document> documents;
 
 	public long getId() {
 		return id;
@@ -63,6 +66,15 @@ public class Directory {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+
+	public List<Document> getDocuments() {
+		return documents;
+	}
+
+	public void setDocuments(List<Document> documents) {
+		this.documents = documents;
 	}
 
 	@Override

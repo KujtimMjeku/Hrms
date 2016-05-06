@@ -36,6 +36,29 @@
                 <i class="fa fa-home"></i> <span>HOME</span>
               </a>
             </li>
+           <li>
+              <a href='<spring:url value="/document/" />'>
+                <i class="fa fa-file"></i> <span>Documents</span>
+              </a>
+            </li>
+            <li>
+              <a href='<spring:url value="/filetype/" />'>
+                <i class="fa fa-file"></i> <span>File types</span>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-cogs"></i>
+                <span>Settings</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li>
+	               <a href='<spring:url value="/user/" />'>
+	                <i class="fa fa-users"></i> <span>Users</span>
+	              </a></li>
+              </ul>
+            </li>
           
             <li class="header">MAIN NAVIGATION</li>
             <li class="treeview">

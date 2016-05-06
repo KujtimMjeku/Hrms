@@ -8,6 +8,7 @@ public class test {
 		BCryptPasswordEncoder pw=new BCryptPasswordEncoder();
 		System.out.println(pw.encode("123456"));
 		System.out.println(pw.encode("123456"));
+		System.out.println(pw.encode("123456"));
 	//	System.out.println(pw.matches("123456", "$2a$10$F3jTGzG.TvJRj9GlErLJ3eukneWjE5uUMOL8m4lBaBKpvqltebBhG"));
 
 	}

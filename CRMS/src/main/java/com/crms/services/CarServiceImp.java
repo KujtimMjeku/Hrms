@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.acls.jdbc.JdbcMutableAclService;
 import org.springframework.stereotype.Service;
 
 import com.crms.dao.CarDAO;
@@ -14,6 +15,7 @@ public class CarServiceImp implements CarService {
 
 	@Autowired
 	private CarDAO carDao;
+	
 	@Override
 	public long getRecordNumber() {
 		return carDao.count();
